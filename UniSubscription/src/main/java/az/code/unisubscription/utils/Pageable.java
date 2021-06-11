@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
  * @param <T>
  */
 public class Pageable<T> {
-    public Pageable(List<T> items, int count , int index, int size, String url){
+    public Pageable(List<T> items, int index, int size){
         this.index = index;
-        this.total = (int) Math.ceil(count / (double) size);
+        this.total = (int) Math.ceil(items.size() / (double) size);
         this.items = items.stream().skip((index-1)*size).limit(size).collect(Collectors.toList());
         this.hasPrevious = index > 1;
         this.hasNext = index < total;

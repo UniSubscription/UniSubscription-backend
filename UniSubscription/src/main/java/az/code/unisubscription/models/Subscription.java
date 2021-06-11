@@ -20,9 +20,10 @@ public class Subscription {
     private int id;
     private String name;
     private LocalDateTime expireDate;
-    private LocalDateTime monthlyDate;
+    private LocalDateTime nextBillingDate;
     private String platform;
-    private boolean isActive;
+    @Column(name = "isPaymentDone", columnDefinition = "boolean default false")
+    private boolean isPaymentDone;
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;

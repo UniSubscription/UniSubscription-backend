@@ -7,8 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface SubscriptionRepository extends CrudRepository<Subscription, Integer> {
-//    @Query(value = "select * from Student",nativeQuery = true)
-//    List<Student> getAllStudent();
+    @Query(value = "select * from Subscription",nativeQuery = true)
+    List<Subscription> getAllSubscriptions();
 //
 //    @Query(value = "select * from students s where s.name = ?1 and s.surname =  ?2",nativeQuery = true)
 //    List<Student> findStudentByNameAndSurname( String name, String surname);
