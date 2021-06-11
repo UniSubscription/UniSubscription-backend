@@ -6,23 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Subscription {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private LocalDate expireDate;
-    private LocalDate monthlyDate;
-    private String platform;
-    private boolean isActive;
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    List<Subscription> subscriptionList;
 }
