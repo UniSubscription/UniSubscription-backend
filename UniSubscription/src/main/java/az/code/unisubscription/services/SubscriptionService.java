@@ -6,15 +6,13 @@ import az.code.unisubscription.dto.SubscriptionPostDto;
 import az.code.unisubscription.dto.SubscriptionPutDto;
 import az.code.unisubscription.models.Subscription;
 import az.code.unisubscription.models.User;
-import az.code.unisubscription.repositories.SubscriptionRepository;
-import az.code.unisubscription.repositories.UserRepository;
+import az.code.unisubscription.repositories.UserRepo;
 import az.code.unisubscription.utils.DtoUtil;
 import az.code.unisubscription.utils.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SubscriptionService implements ISubscriptionService{
@@ -22,7 +20,7 @@ public class SubscriptionService implements ISubscriptionService{
     SubscriptionDao dao;
 
     @Autowired
-    UserRepository repository;
+    UserRepo repository;
 
     public SubscriptionService(SubscriptionDao dao){
         this.dao = dao;
