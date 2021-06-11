@@ -9,7 +9,7 @@ public class SubscriptionGetDTO {
         id = subscription.getId();
         name = subscription.getName();
         nextBillingDate = subscription.getNextBillingDate();
-        isPaymentDone = subscription.isPaymentDone();
+//        isPaymentDone = subscription.isPaymentDone();
         subscriptionDate = subscription.getSubscriptionDate();
         subscriptionMail = subscription.getSubscriptionMail();
         cost = subscription.getCost();
@@ -20,7 +20,7 @@ public class SubscriptionGetDTO {
     private String subscriptionMail;
     private LocalDateTime nextBillingDate;
     private double cost;
-    private boolean isPaymentDone;
+//    private boolean isPaymentDone;
     private LocalDateTime  subscriptionDate;
 
     // sample getters and setters
@@ -47,14 +47,14 @@ public class SubscriptionGetDTO {
     public void setNextBillingDate(LocalDateTime nextBillingDate) {
         this.nextBillingDate = nextBillingDate;
     }
-
-    public boolean isPaymentDone() {
-        return isPaymentDone;
-    }
-
-    public void setPaymentDone(boolean paymentDone) {
-        isPaymentDone = paymentDone;
-    }
+//
+//    public boolean isPaymentDone() {
+//        return isPaymentDone;
+//    }
+//
+//    public void setPaymentDone(boolean paymentDone) {
+//        isPaymentDone = paymentDone;
+//    }
 
     public LocalDateTime getSubscriptionDate() {
         return subscriptionDate;
