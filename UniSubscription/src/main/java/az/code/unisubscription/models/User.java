@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -22,4 +23,12 @@ public class User {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     List<Subscription> subscriptionList;
+    private String name;
+    private String surname;
+    private String mail;
+    private String password;
+    private boolean isActive;
+    private LocalDateTime creationDate;
+    private LocalDateTime deletedDate;
+
 }
