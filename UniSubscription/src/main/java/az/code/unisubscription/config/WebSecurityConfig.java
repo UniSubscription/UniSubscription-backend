@@ -1,5 +1,4 @@
-package az.code.unisubscription.utils;
-
+package az.code.unisubscription.config;
 
 import az.code.unisubscription.jwt.JwtAuthenticationEntryPoint;
 import az.code.unisubscription.jwt.JwtRequestFilter;

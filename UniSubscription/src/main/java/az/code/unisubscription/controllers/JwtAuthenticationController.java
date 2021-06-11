@@ -1,10 +1,8 @@
 package az.code.unisubscription.controllers;
 
-import java.util.Objects;
-
 import az.code.unisubscription.jwt.JwtRequest;
 import az.code.unisubscription.jwt.JwtResponse;
-import az.code.unisubscription.services.JwtUserDetailsService;
+import az.code.unisubscription.jwt.JwtUserDetailsService;
 import az.code.unisubscription.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
