@@ -32,10 +32,15 @@ public class SubscriptionDataDao implements SubscriptionDao{
     }
 
     @Override
-    public Subscription updateSubscription(int id, Subscription student) {
+    public Subscription updateSubscription(int id, Subscription subscriptionDto) {
         Subscription subscription = get(id);
         if (subscription == null) return null;
         subscription.setId(id);
+        subscription.setName(subscriptionDto.getName());
+        subscription.setSubscriptionMail(subscriptionDto.getSubscriptionMail());
+        subscription.setSubscriptionDate(subscriptionDto.getSubscriptionDate());
+        subscription.setNextBillingDate(subscriptionDto.getNextBillingDate());
+        subscription.setCost(subscriptionDto.getCost());
         subscriptionRepository.save(subscription);
         return subscription;
     }
@@ -44,7 +49,18 @@ public class SubscriptionDataDao implements SubscriptionDao{
     public Subscription deleteSubscription(int id) {
         Subscription subscription = get(id);
         if (subscription == null) return null;
-        subscriptionRepository.delete(subscription);
+        subscription.setDeleted(true);
+        subscriptionRepository.save(subscription);
+        return subscription;
+    }
+
+    @Override
+    public Subscription doneMonthlyPayment(int id) {
+        Subscription subscription = get(id);
+        if (subscription == null) return null;
+        subscription.setPaymentDone(true);
+        subscription.setNextBillingDate(subscription.getNextBillingDate().plusMonths(1));
+        subscriptionRepository.save(subscription);
         return subscription;
     }
 }

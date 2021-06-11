@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
  */
 public class Pageable<T> {
     public Pageable(List<T> items, int index, int size){
+        System.out.println("AAAAAAAAAAAAAAa");
         this.index = index;
         this.total = (int) Math.ceil(items.size() / (double) size);
         this.items = items.stream().skip((index-1)*size).limit(size).collect(Collectors.toList());

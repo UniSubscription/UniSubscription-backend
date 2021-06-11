@@ -1,6 +1,10 @@
 package az.code.unisubscription.controllers;
 
 import az.code.unisubscription.dto.SubscriptionGetDTO;
+import az.code.unisubscription.dto.SubscriptionPostDto;
+import az.code.unisubscription.dto.SubscriptionPutDto;
+import az.code.unisubscription.exceptions.SubscriptionNotFound;
+import az.code.unisubscription.models.Subscription;
 import az.code.unisubscription.services.ISubscriptionService;
 import az.code.unisubscription.utils.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,48 +21,60 @@ public class SubscriptionController {
         }
 
         /**
-         * gets all students
+         * gets all subscriptions
          *
          * @return
          */
         @GetMapping
         public ResponseEntity<Pageable<SubscriptionGetDTO>> getStudents(
-                @RequestParam(required = false, value = "size") Integer size,
+                @RequestParam(required = false, defaultValue = "10") Integer size,
                 @RequestParam(required = false, defaultValue = "1") int page) {
             return new ResponseEntity<>(service.getAll(size, page), HttpStatus.OK);
         }
-//        /**
-//         * creates new student
-//         * @param student
-//         * @return
-//         */
-//        @PostMapping
-//        public ResponseEntity<SubscriptionGetDTO> insertStudent(@RequestBody SubscriptionGetDTO subscription){
-//            return new ResponseEntity<>(service.addStudent(student), HttpStatus.OK);
-//        }
-//
-//        /**
-//         * updates the student by id
-//         * @param id
-//         * @param student
-//         * @return
-//         */
-//        @PutMapping("/{id}")
-//        public ResponseEntity<StudentMarkDTO> updateStudent(@PathVariable int id , @RequestBody Student student){
-//            StudentMarkDTO updatedStudent = service.updateStudent(id, student);
-//            if (updatedStudent == null) throw new StudentNotFound();
-//            return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
-//        }
-//
-//        /**
-//         * deletes the student by id
-//         * @param id
-//         * @return
-//         */
-//        @DeleteMapping("/{id}")
-//        public ResponseEntity deleteStudent(@PathVariable int id ){
-//            if(service.deleteStudent(id) == null) throw new StudentNotFound();
-//            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
-//        }
+        /**
+         * creates new subscription
+         * @param subscription
+         * @return
+         */
+        @PostMapping
+        public ResponseEntity<SubscriptionGetDTO> insertStudent(@RequestBody SubscriptionPostDto subscription){
+            return new ResponseEntity<>(service.addSubscription(subscription), HttpStatus.OK);
+        }
+
+        /**
+         * updates the subscription by id
+         * @param id
+         * @param subscription
+         * @return
+         */
+        @PutMapping("/{id}")
+        public ResponseEntity<SubscriptionGetDTO> updateStudent(@PathVariable int id , @RequestBody SubscriptionPutDto subscription){
+            SubscriptionGetDTO updatedStudent = service.updateSubscription(id, subscription);
+            if (updatedStudent == null) throw new SubscriptionNotFound();
+            return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
+        }
+
+    /**
+     * payment done
+     * @param id
+     * @param id
+     * @return
+     */
+    @PutMapping("/{id}/donePayment")
+    public ResponseEntity donePayment(@PathVariable int id){
+        Subscription updatedStudent = service.doneMonthlyPayment(id);
+        if (updatedStudent == null) throw new SubscriptionNotFound();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+        /**
+         * deletes the student by id
+         * @param id
+         * @return
+         */
+        @DeleteMapping("/{id}")
+        public ResponseEntity deleteStudent(@PathVariable int id ){
+            if(service.deleteSubscription(id) == null) throw new SubscriptionNotFound();
+            return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+        }
 
 }

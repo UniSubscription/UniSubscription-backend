@@ -10,12 +10,16 @@ public class SubscriptionGetDTO {
         name = subscription.getName();
         nextBillingDate = subscription.getNextBillingDate();
         isPaymentDone = subscription.isPaymentDone();
-        subscriptionDate = subscription.getExpireDate();
+        subscriptionDate = subscription.getSubscriptionDate();
+        subscriptionMail = subscription.getSubscriptionMail();
+        cost = subscription.getCost();
     }
 
     private int id;
     private String name;
+    private String subscriptionMail;
     private LocalDateTime nextBillingDate;
+    private double cost;
     private boolean isPaymentDone;
     private LocalDateTime  subscriptionDate;
 
@@ -58,5 +62,21 @@ public class SubscriptionGetDTO {
 
     public void setSubscriptionDate(LocalDateTime subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
+    }
+
+    public String getSubscriptionMail() {
+        return subscriptionMail;
+    }
+
+    public void setSubscriptionMail(String subscriptionMail) {
+        this.subscriptionMail = subscriptionMail;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

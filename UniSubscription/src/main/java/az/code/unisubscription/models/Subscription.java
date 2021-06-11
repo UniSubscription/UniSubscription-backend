@@ -19,8 +19,10 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private LocalDateTime expireDate;
+    private String subscriptionMail;
+    private LocalDateTime subscriptionDate;
     private LocalDateTime nextBillingDate;
+    private double cost;
     private String platform;
     @Column(name = "isPaymentDone", columnDefinition = "boolean default false")
     private boolean isPaymentDone;
@@ -30,4 +32,6 @@ public class Subscription {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
+    private boolean isDeleted;
 }

@@ -10,4 +10,5 @@ public interface SubscriptionDao {
     Subscription addSubscription(Subscription student);
     Subscription updateSubscription(int id, Subscription student);
     Subscription deleteSubscription(int id);
+    Subscription doneMonthlyPayment(int id);
 }
