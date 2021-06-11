@@ -25,10 +25,10 @@ public class User {
     List<Subscription> subscriptionList;
     private String name;
     private String surname;
+    @Column(unique = true)
     private String mail;
     private String password;
     private boolean isActive;
     private LocalDateTime creationDate;
     private LocalDateTime deletedDate;
-
 }

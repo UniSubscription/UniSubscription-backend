@@ -27,15 +27,15 @@ public class SubscriptionService implements ISubscriptionService{
     }
 
     @Override
-    public Pageable<SubscriptionGetDTO> getAll(Integer size, int page) {
-        List<SubscriptionGetDTO> subscriptions = DtoUtil.convertToSubscriptionDto(dao.getAll());
+    public Pageable<SubscriptionGetDTO> getAll(int userId, Integer size, int page) {
+        List<SubscriptionGetDTO> subscriptions = DtoUtil.convertToSubscriptionDto(dao.getAll(userId));
         return new Pageable<>(subscriptions, page, size);
     }
 
     @Override
-    public SubscriptionGetDTO addSubscription(SubscriptionPostDto subscriptionDto) {
+    public SubscriptionGetDTO addSubscription(int userId, SubscriptionPostDto subscriptionDto) {
         Subscription subscription = DtoUtil.convertPostDtoToSubscription(subscriptionDto);
-        User user = repository.findById(1).get();
+        User user = repository.findById(userId).get();
         subscription.setUser(user);
         return new SubscriptionGetDTO(dao.addSubscription(subscription));
     }

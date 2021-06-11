@@ -6,17 +6,26 @@ import az.code.unisubscription.dto.SubscriptionPutDto;
 import az.code.unisubscription.exceptions.SubscriptionNotFound;
 import az.code.unisubscription.models.Subscription;
 import az.code.unisubscription.services.ISubscriptionService;
+import az.code.unisubscription.utils.JwtTokenUtil;
 import az.code.unisubscription.utils.Pageable;
+import javassist.tools.web.BadHttpRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api/subscriptions")
 public class SubscriptionController {
-        private ISubscriptionService service;
 
-        public SubscriptionController(ISubscriptionService service) {
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    private ISubscriptionService service;
+
+    public SubscriptionController(ISubscriptionService service) {
             this.service = service;
         }
 
@@ -26,10 +35,16 @@ public class SubscriptionController {
          * @return
          */
         @GetMapping
-        public ResponseEntity<Pageable<SubscriptionGetDTO>> getStudents(
+        public ResponseEntity<Pageable<SubscriptionGetDTO>> getAll(
+                HttpServletRequest request,
                 @RequestParam(required = false, defaultValue = "10") Integer size,
-                @RequestParam(required = false, defaultValue = "1") int page) {
-            return new ResponseEntity<>(service.getAll(size, page), HttpStatus.OK);
+                @RequestParam(required = false, defaultValue = "1") int page) throws BadHttpRequest {
+
+            Integer userId = jwtTokenUtil.getUserIdFromToken(request.getHeader("Authorization").replace("Bearer ", ""));
+            if (userId == null){
+                throw new BadHttpRequest();
+            }
+            return new ResponseEntity<>(service.getAll(userId, size, page), HttpStatus.OK);
         }
         /**
          * creates new subscription
@@ -37,8 +52,14 @@ public class SubscriptionController {
          * @return
          */
         @PostMapping
-        public ResponseEntity<SubscriptionGetDTO> insertStudent(@RequestBody SubscriptionPostDto subscription){
-            return new ResponseEntity<>(service.addSubscription(subscription), HttpStatus.OK);
+        public ResponseEntity<SubscriptionGetDTO> insertStudent(
+                HttpServletRequest request,
+                @RequestBody SubscriptionPostDto subscription) throws BadHttpRequest {
+            Integer userId = jwtTokenUtil.getUserIdFromToken(request.getHeader("Authorization").replace("Bearer ", ""));
+            if (userId == null){
+                throw new BadHttpRequest();
+            }
+            return new ResponseEntity<>(service.addSubscription(userId, subscription), HttpStatus.OK);
         }
 
         /**
@@ -76,5 +97,4 @@ public class SubscriptionController {
             if(service.deleteSubscription(id) == null) throw new SubscriptionNotFound();
             return new ResponseEntity<>( HttpStatus.NO_CONTENT);
         }
-
 }
