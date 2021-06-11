@@ -15,8 +15,8 @@ public class SubscriptionDataDao implements SubscriptionDao{
     SubscriptionRepository subscriptionRepository;
 
     @Override
-    public List<Subscription> getAll() {
-        return subscriptionRepository.getAllSubscriptions();
+    public List<Subscription> getAll(int userId) {
+        return subscriptionRepository.getAllSubscriptions(userId);
     }
 
     @Override

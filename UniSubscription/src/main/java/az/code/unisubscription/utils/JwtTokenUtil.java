@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import az.code.unisubscription.models.User;
+import az.code.unisubscription.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil implements Serializable {
 
+    private UserRepo repo;
+
+    public JwtTokenUtil(UserRepo repo){
+        this.repo = repo;
+    }
+
     private static final long serialVersionUID = -2550185165626007488L;
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
@@ -27,6 +35,13 @@ public class JwtTokenUtil implements Serializable {
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
+    }
+
+    public Integer getUserIdFromToken(String token) {
+        String email = getUsernameFromToken(token);
+        User user =  repo.getUserByMail(email);
+        if (user != null) return  user.getId();
+        return null;
     }
 
     //retrieve expiration date from jwt token

@@ -5,7 +5,7 @@ import az.code.unisubscription.models.Subscription;
 import java.util.List;
 
 public interface SubscriptionDao {
-    List<Subscription> getAll();
+    List<Subscription> getAll(int userId);
     Subscription get(int id);
     Subscription addSubscription(Subscription student);
     Subscription updateSubscription(int id, Subscription student);
