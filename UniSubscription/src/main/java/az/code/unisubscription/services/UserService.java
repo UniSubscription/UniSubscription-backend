@@ -19,10 +19,10 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public UserGetDto register(UserRegisterDto userDto) {
+    public User register(UserRegisterDto userDto) {
         User user = DtoUtil.convertRegisterDtoToUser(userDto);
         user.setCreationDate(LocalDateTime.now());
         user.setActive(true);
-        return new UserGetDto(dao.createUser(user));
+        return dao.createUser(user);
     }
 }

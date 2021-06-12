@@ -5,5 +5,5 @@ import az.code.unisubscription.dto.UserRegisterDto;
 import az.code.unisubscription.models.User;
 
 public interface IUserService {
-    public UserGetDto register(UserRegisterDto user);
+    public User register(UserRegisterDto user);
 }
