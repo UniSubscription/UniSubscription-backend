@@ -33,6 +33,11 @@ public class SubscriptionService implements ISubscriptionService{
     }
 
     @Override
+    public SubscriptionGetDTO getById(int id) {
+        return new SubscriptionGetDTO(dao.get(id));
+    }
+
+    @Override
     public SubscriptionGetDTO addSubscription(int userId, SubscriptionPostDto subscriptionDto) {
         Subscription subscription = DtoUtil.convertPostDtoToSubscription(subscriptionDto);
         User user = repository.findById(userId).get();

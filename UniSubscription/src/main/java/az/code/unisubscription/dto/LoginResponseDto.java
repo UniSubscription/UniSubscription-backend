@@ -12,13 +12,11 @@ public class LoginResponseDto {
 
     public LoginResponseDto(User user, String token){
         this.token = token;
-        this.user = new UserDto(user.getId(), user.getName()+" "+user.getSurname());
+        this.user = new UserDto(user);
     }
 
     private String token;
     private UserDto user;
-
-
 
     public UserDto getUser() {
         return user;
@@ -29,26 +27,3 @@ public class LoginResponseDto {
     }
 }
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class UserDto{
-    private int id;
-    private String fullName;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-}

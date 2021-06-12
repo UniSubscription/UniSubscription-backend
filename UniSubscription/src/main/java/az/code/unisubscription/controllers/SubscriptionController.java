@@ -5,6 +5,7 @@ import az.code.unisubscription.dto.SubscriptionPostDto;
 import az.code.unisubscription.dto.SubscriptionPutDto;
 import az.code.unisubscription.exceptions.SubscriptionNotFound;
 import az.code.unisubscription.models.Subscription;
+import az.code.unisubscription.models.User;
 import az.code.unisubscription.services.ISubscriptionService;
 import az.code.unisubscription.utils.JwtTokenUtil;
 import az.code.unisubscription.utils.Pageable;
@@ -40,12 +41,25 @@ public class SubscriptionController {
                 @RequestParam(required = false, defaultValue = "10") Integer size,
                 @RequestParam(required = false, defaultValue = "1") int page) throws BadHttpRequest {
 
-            Integer userId = jwtTokenUtil.getUserIdFromToken(request.getHeader("Authorization").replace("Bearer ", ""));
-            if (userId == null){
+            User user = jwtTokenUtil.getUserFromToken(request.getHeader("Authorization").replace("Bearer ", ""));
+            if (user == null){
                 throw new BadHttpRequest();
             }
-            return new ResponseEntity<>(service.getAll(userId, size, page), HttpStatus.OK);
+            return new ResponseEntity<>(service.getAll(user.getId(), size, page), HttpStatus.OK);
         }
+
+    /**
+     * gets all subscriptions
+     *
+     * @return
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<SubscriptionGetDTO> getById(
+            HttpServletRequest request,
+            @PathVariable int id) throws BadHttpRequest {
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
+    }
+
         /**
          * creates new subscription
          * @param subscription
@@ -55,11 +69,11 @@ public class SubscriptionController {
         public ResponseEntity<SubscriptionGetDTO> insertStudent(
                 HttpServletRequest request,
                 @RequestBody SubscriptionPostDto subscription) throws BadHttpRequest {
-            Integer userId = jwtTokenUtil.getUserIdFromToken(request.getHeader("Authorization").replace("Bearer ", ""));
-            if (userId == null){
+            User user = jwtTokenUtil.getUserFromToken(request.getHeader("Authorization").replace("Bearer ", ""));
+            if (user == null){
                 throw new BadHttpRequest();
             }
-            return new ResponseEntity<>(service.addSubscription(userId, subscription), HttpStatus.OK);
+            return new ResponseEntity<>(service.addSubscription(user.getId(), subscription), HttpStatus.OK);
         }
 
         /**

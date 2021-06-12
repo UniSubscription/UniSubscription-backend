@@ -3,15 +3,15 @@ package az.code.unisubscription.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class SubscriptionPutDto {
     private String name;
-    private LocalDateTime subscriptionDate;
+    private LocalDate subscriptionDate;
     private String subscriptionMail;
     private double cost;
-    private LocalDateTime nextBillingDate;
-//    private boolean isPaymentDone;
+    private LocalDate nextBillingDate;
     public String getName() {
         return name;
     }
@@ -20,11 +20,11 @@ public class SubscriptionPutDto {
         this.name = name;
     }
 
-    public LocalDateTime getSubscriptionDate() {
+    public LocalDate getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(LocalDateTime subscriptionDate) {
+    public void setSubscriptionDate(LocalDate subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 
@@ -44,19 +44,11 @@ public class SubscriptionPutDto {
         this.cost = cost;
     }
 
-    public LocalDateTime getNextBillingDate() {
+    public LocalDate getNextBillingDate() {
         return nextBillingDate;
     }
 
-    public void setNextBillingDate(LocalDateTime nextBillingDate) {
+    public void setNextBillingDate(LocalDate nextBillingDate) {
         this.nextBillingDate = nextBillingDate;
     }
-
-//    public boolean isPaymentDone() {
-//        return isPaymentDone;
-//    }
-//
-//    public void setPaymentDone(boolean paymentDone) {
-//        isPaymentDone = paymentDone;
-//    }
 }

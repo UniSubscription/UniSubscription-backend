@@ -8,6 +8,7 @@ import az.code.unisubscription.models.Subscription;
 import az.code.unisubscription.models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,9 @@ public class DtoUtil {
                 .subscriptionMail(subscriptionPostDto.getSubscriptionMail())
                 .subscriptionDate(subscriptionPostDto.getSubscriptionDate())
                 .cost(subscriptionPostDto.getCost())
-                .nextBillingDate(LocalDateTime.now()
+                .nextBillingDate(LocalDate.now()
                         .plusMonths(1)
                         .withDayOfMonth(subscriptionPostDto.getSubscriptionDate().getDayOfMonth())
-                        .withHour(subscriptionPostDto.getSubscriptionDate().getHour())
-                        .withMinute(subscriptionPostDto.getSubscriptionDate().getMinute())
-                        .withSecond(subscriptionPostDto.getSubscriptionDate().getSecond())
                 )
                 .build();
     }

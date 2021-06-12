@@ -8,6 +8,7 @@ import az.code.unisubscription.utils.Pageable;
 
 public interface ISubscriptionService {
     Pageable<SubscriptionGetDTO> getAll(int userId, Integer size , int page);
+    SubscriptionGetDTO getById(int id);
     SubscriptionGetDTO addSubscription(int userId, SubscriptionPostDto subscription);
     SubscriptionGetDTO updateSubscription(int id, SubscriptionPutDto subscriptionDto);
     SubscriptionGetDTO deleteSubscription(int id);

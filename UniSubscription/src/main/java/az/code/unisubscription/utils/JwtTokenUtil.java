@@ -37,10 +37,10 @@ public class JwtTokenUtil implements Serializable {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    public Integer getUserIdFromToken(String token) {
+    public User getUserFromToken(String token) {
         String email = getUsernameFromToken(token);
         User user =  repo.getUserByMail(email);
-        if (user != null) return  user.getId();
+        if (user != null) return  user;
         return null;
     }
 

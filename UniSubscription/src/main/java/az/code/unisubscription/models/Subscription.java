@@ -20,8 +20,8 @@ public class Subscription {
     private int id;
     private String name;
     private String subscriptionMail;
-    private LocalDateTime subscriptionDate;
-    private LocalDateTime nextBillingDate;
+    private LocalDate subscriptionDate;
+    private LocalDate nextBillingDate;
     private double cost;
     private String platform;
     @Column(name = "isPaymentDone", columnDefinition = "boolean default false")
