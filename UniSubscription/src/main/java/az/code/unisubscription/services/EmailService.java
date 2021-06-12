@@ -17,9 +17,9 @@ public class EmailService implements IEmailService{
         this.javaMailSender = javaMailSender;
     }
     @Override
-    public void sendMail(User user, String subject, String text) throws MailException {
+    public void sendMail(String email, String subject, String text) throws MailException {
         SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(user.getMail());
+        mail.setTo(email);
         mail.setFrom("example@gmail.com");
         mail.setSubject(subject);
         mail.setText(text);

@@ -5,6 +5,7 @@ import az.code.unisubscription.dto.UserGetDto;
 import az.code.unisubscription.dto.UserRegisterDto;
 import az.code.unisubscription.dto.SubscriptionPostDto;
 import az.code.unisubscription.models.User;
+import az.code.unisubscription.services.IEmailService;
 import az.code.unisubscription.services.IUserService;
 import az.code.unisubscription.utils.JwtTokenUtil;
 import javassist.tools.web.BadHttpRequest;
@@ -23,6 +24,9 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private IEmailService emailService;
+
     public UserController(IUserService service) {
         this.service = service;
     }
@@ -34,7 +38,9 @@ public class UserController {
      */
     @PostMapping("/register")
     public ResponseEntity<UserGetDto> insertUser(@RequestBody UserRegisterDto registration){
-        return new ResponseEntity<>(service.register(registration), HttpStatus.OK);
+        UserGetDto user = service.register(registration);
+        emailService.sendMail(user.getEmail(), "Təbriklər","Siz uğurla qeydiyyatdan keçdiniz!");
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/user")

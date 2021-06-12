@@ -21,16 +21,13 @@ public class MyScheduler {
 
     @Scheduled(cron = "0 0 23 * * ?", zone="Asia/Baku")
     public void expireDateSendMail(){
-//        System.out.println("TESTTTTTTTTTTTTTTTTTTTt");
-        List<Subscription> allSubscriptions = subscriptionRepository.getAllSubscriptions();
+        List<Subscription> allSubscriptions = subscriptionRepository.getAllSubscriptionsList();
         for(Subscription s : allSubscriptions){
             LocalDate today = LocalDate.now();
-//            System.out.println(today + " today");
-            LocalDateTime expireDateLDT = s.getSubscriptionDate().plusMonths(1).minusDays(1);
-            LocalDate expireDate =  expireDateLDT.toLocalDate();
-//            System.out.println(expireDate + " expire date");
+            LocalDate expireDateLDT = s.getSubscriptionDate().plusMonths(1).minusDays(1);
+            LocalDate expireDate =  expireDateLDT;
             if(expireDate.equals(today)){
-                iEmailService.sendMail(s.getUser(), "Subscription expiring ", "Your subscription expiring Tomorrow " +  s.getSubscriptionDate().plusMonths(1).toString());
+                iEmailService.sendMail(s.getUser().getMail(), "Subscription expiring ", "Your subscription expiring Tomorrow " +  s.getSubscriptionDate().plusMonths(1).toString());
             }
         }
     }

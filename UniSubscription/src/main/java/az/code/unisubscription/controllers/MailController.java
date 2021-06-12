@@ -23,6 +23,6 @@ public class MailController {
         user.setName("Amrah");
         user.setSurname("Ahmadov");
         user.setMail("ahmadovamrah906@gmail.com");
-        emailService.sendMail(user, "Welcome", "you signed up successfull");
+        emailService.sendMail(user.getMail(), "Welcome", "you signed up successfull");
     }
 }

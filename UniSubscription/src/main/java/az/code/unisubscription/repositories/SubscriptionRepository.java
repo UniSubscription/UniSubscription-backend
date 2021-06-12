@@ -10,4 +10,7 @@ import java.util.List;
 public interface SubscriptionRepository extends CrudRepository<Subscription, Integer> {
     @Query(value = "select * from Subscription WHERE is_deleted = false AND user_id = :userId",nativeQuery = true)
     List<Subscription> getAllSubscriptions(int userId);
+
+    @Query(value = "select * from Subscription WHERE is_deleted = false",nativeQuery = true)
+    List<Subscription> getAllSubscriptionsList();
 }
