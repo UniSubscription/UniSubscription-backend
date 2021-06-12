@@ -82,7 +82,7 @@ public class SubscriptionController {
          * @param subscription
          * @return
          */
-        @PutMapping("/{id}")
+        @PostMapping("/{id}")
         public ResponseEntity<SubscriptionGetDTO> updateStudent(@PathVariable int id , @RequestBody SubscriptionPutDto subscription){
             SubscriptionGetDTO updatedStudent = service.updateSubscription(id, subscription);
             if (updatedStudent == null) throw new SubscriptionNotFound();
@@ -95,7 +95,7 @@ public class SubscriptionController {
      * @param id
      * @return
      */
-    @PutMapping("/{id}/donePayment")
+    @GetMapping("/{id}/donePayment")
     public ResponseEntity donePayment(@PathVariable int id){
         Subscription updatedStudent = service.doneMonthlyPayment(id);
         if (updatedStudent == null) throw new SubscriptionNotFound();
