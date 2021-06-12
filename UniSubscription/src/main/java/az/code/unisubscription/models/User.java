@@ -31,4 +31,8 @@ public class User {
     private boolean isActive;
     private LocalDateTime creationDate;
     private LocalDateTime deletedDate;
+
+    public String getFullName(){
+        return this.name + " "+this.surname;
+    }
 }

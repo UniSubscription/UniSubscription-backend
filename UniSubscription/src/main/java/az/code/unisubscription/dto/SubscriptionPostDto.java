@@ -3,11 +3,13 @@ package az.code.unisubscription.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class SubscriptionPostDto {
     private String name;
-    private LocalDateTime subscriptionDate;
+    private LocalDate subscriptionDate;
     private String subscriptionMail;
     private double cost;
 
@@ -19,11 +21,11 @@ public class SubscriptionPostDto {
         this.name = name;
     }
 
-    public LocalDateTime getSubscriptionDate() {
+    public LocalDate getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(LocalDateTime subscriptionDate) {
+    public void setSubscriptionDate(LocalDate subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 

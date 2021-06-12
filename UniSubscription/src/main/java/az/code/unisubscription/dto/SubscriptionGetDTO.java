@@ -2,14 +2,15 @@ package az.code.unisubscription.dto;
 
 import az.code.unisubscription.models.Subscription;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class SubscriptionGetDTO {
     public SubscriptionGetDTO(Subscription subscription){
         id = subscription.getId();
         name = subscription.getName();
         nextBillingDate = subscription.getNextBillingDate();
-//        isPaymentDone = subscription.isPaymentDone();
         subscriptionDate = subscription.getSubscriptionDate();
         subscriptionMail = subscription.getSubscriptionMail();
         cost = subscription.getCost();
@@ -18,12 +19,11 @@ public class SubscriptionGetDTO {
     private int id;
     private String name;
     private String subscriptionMail;
-    private LocalDateTime nextBillingDate;
+    private LocalDate nextBillingDate;
     private double cost;
-//    private boolean isPaymentDone;
-    private LocalDateTime  subscriptionDate;
+    private LocalDate  subscriptionDate;
 
-    // sample getters and setters
+
     public int getId() {
         return id;
     }
@@ -40,27 +40,19 @@ public class SubscriptionGetDTO {
         this.name = name;
     }
 
-    public LocalDateTime getNextBillingDate() {
+    public LocalDate getNextBillingDate() {
         return nextBillingDate;
     }
 
-    public void setNextBillingDate(LocalDateTime nextBillingDate) {
+    public void setNextBillingDate(LocalDate nextBillingDate) {
         this.nextBillingDate = nextBillingDate;
     }
-//
-//    public boolean isPaymentDone() {
-//        return isPaymentDone;
-//    }
-//
-//    public void setPaymentDone(boolean paymentDone) {
-//        isPaymentDone = paymentDone;
-//    }
 
-    public LocalDateTime getSubscriptionDate() {
+    public LocalDate getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(LocalDateTime subscriptionDate) {
+    public void setSubscriptionDate(LocalDate subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 
